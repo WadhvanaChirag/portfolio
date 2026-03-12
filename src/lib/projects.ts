@@ -583,6 +583,7 @@ function getFilesFromDir(dirPath: string): string[] {
 export function getProjectsData(): Project[] {
   const publicDir = path.join(process.cwd(), 'public');
   const assetsDir = path.join(publicDir, 'assets');
+  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
 
   return rawProjects.map(project => {
     // If a specific folderName is provided, use it, otherwise fallback to exact project name or normalized.
@@ -604,14 +605,14 @@ export function getProjectsData(): Project[] {
       if (potentialLogo) {
         // Reconstruct exact case
         const exactFileName = fs.readdirSync(projectPath).find(f => f.toLowerCase() === potentialLogo);
-        logoUrl = `/assets/${targetFolder}/${exactFileName}`;
+        logoUrl = `${basePath}/assets/${targetFolder}/${exactFileName}`;
       }
 
       // Check subdirectories
       const getDeviceAssets = (device: string) => {
         const devicePath = path.join(projectPath, device);
         const files = getFilesFromDir(devicePath);
-        return files.map(file => `/assets/${targetFolder}/${device}/${file}`);
+        return files.map(file => `${basePath}/assets/${targetFolder}/${device}/${file}`);
       };
 
       mobileAssets = getDeviceAssets('mobile');
