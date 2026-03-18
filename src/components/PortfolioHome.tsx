@@ -79,7 +79,7 @@ export function PortfolioHome({ projects }: { projects: Project[] }) {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full px-4 sm:px-0">
-            <a href="/resume.pdf" target="_blank" className="w-full sm:w-auto flex justify-center items-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-medium transition-colors">
+            <a href={process.env.NODE_ENV === 'production' ? "/portfolio/resume.pdf" : "/resume.pdf"} target="_blank" className="w-full sm:w-auto flex justify-center items-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-medium transition-colors">
               <Download size={18} />
               Download Resume
             </a>

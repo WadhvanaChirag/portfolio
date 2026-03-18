@@ -69,7 +69,7 @@ export function Navbar() {
           </nav>
           
           <a
-            href="/resume.pdf"
+            href={process.env.NODE_ENV === 'production' ? "/portfolio/resume.pdf" : "/resume.pdf"}
             target="_blank"
             className="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-500 transition-colors"
           >
@@ -109,7 +109,7 @@ export function Navbar() {
                 </a>
               ))}
               <a
-                href="/resume.pdf"
+                href={process.env.NODE_ENV === 'production' ? "/portfolio/resume.pdf" : "/resume.pdf"}
                 target="_blank"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="inline-flex w-full items-center justify-center px-4 py-3 text-base font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-colors"
