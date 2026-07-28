@@ -427,10 +427,6 @@ export function PortfolioHome({ projects }: { projects: Project[] }) {
               <a href={process.env.NODE_ENV === "production" ? "/portfolio/resume.pdf" : "/resume.pdf"} target="_blank" className="hover:text-[#e8a838] transition-colors hover:scale-110" title="Resume"><Download size={24} /></a>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-text-muted text-sm font-medium">
-            <p>© {new Date().getFullYear()} Chirag Wadhvana. All rights reserved.</p>
-            <p>Designed with intentionality.</p>
-          </div>
         </div>
       </footer>
     </main>
