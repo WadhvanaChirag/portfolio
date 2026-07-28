@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Download, Smartphone, Server, Wrench, Code2, Linkedin, Layers, Check, Github } from "lucide-react";
+import { Mail, Download, Smartphone, Server, Wrench, Code2, Linkedin, Layers, Check } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Section } from "@/components/ui/Section";
 import { BentoCard } from "@/components/ui/BentoCard";
@@ -231,7 +231,6 @@ export function PortfolioHome({ projects }: { projects: Project[] }) {
               className="flex items-center justify-center lg:justify-start gap-6 pt-10 text-text-muted"
             >
               <a href="https://www.linkedin.com/in/chirag-wadhvana-79a417187" target="_blank" className="hover:text-[#e8a838] transition-colors" title="LinkedIn"><Linkedin size={22} /></a>
-              <a href="https://github.com" target="_blank" className="hover:text-[#e8a838] transition-colors" title="GitHub"><Github size={22} /></a>
               <a href="mailto:wadhvana8866@gmail.com" className="hover:text-[#e8a838] transition-colors" title="Email"><Mail size={22} /></a>
             </motion.div>
           </div>
@@ -425,7 +424,6 @@ export function PortfolioHome({ projects }: { projects: Project[] }) {
             <div className="flex items-center gap-6 text-text-muted">
               <a href="mailto:wadhvana8866@gmail.com" className="hover:text-[#e8a838] transition-colors hover:scale-110" title="Email"><Mail size={24} /></a>
               <a href="https://www.linkedin.com/in/chirag-wadhvana-79a417187" target="_blank" className="hover:text-[#e8a838] transition-colors hover:scale-110" title="LinkedIn"><Linkedin size={24} /></a>
-              <a href="https://github.com" target="_blank" className="hover:text-[#e8a838] transition-colors hover:scale-110" title="GitHub"><Github size={24} /></a>
               <a href={process.env.NODE_ENV === "production" ? "/portfolio/resume.pdf" : "/resume.pdf"} target="_blank" className="hover:text-[#e8a838] transition-colors hover:scale-110" title="Resume"><Download size={24} /></a>
             </div>
           </div>
