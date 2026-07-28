@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
   { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
 ];
@@ -27,7 +27,7 @@ export function Navbar() {
     const element = document.querySelector(href);
     if (element) {
       window.scrollTo({
-        top: element.getBoundingClientRect().top + window.scrollY - 80, // Offset for navbar
+        top: element.getBoundingClientRect().top + window.scrollY - 80,
         behavior: "smooth",
       });
     }
@@ -38,10 +38,10 @@ export function Navbar() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-slate-950/80 backdrop-blur-md border-b border-white/10 shadow-lg"
+            ? "bg-bg-primary/85 backdrop-blur-md border-b border-border shadow-lg"
             : "bg-transparent"
         }`}
       >
@@ -49,9 +49,9 @@ export function Navbar() {
           <a 
             href="#" 
             onClick={(e) => handleNavClick(e, "body")}
-            className="text-xl font-bold tracking-tighter text-white"
+            className="text-xl font-bold tracking-tighter text-text-primary"
           >
-            CW<span className="text-blue-500">.</span>
+            CW<span className="text-[#e8a838]">.</span>
           </a>
           
           {/* Desktop Nav */}
@@ -61,29 +61,35 @@ export function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
               >
                 {item.name}
               </a>
             ))}
           </nav>
           
-          <a
-            href={process.env.NODE_ENV === 'production' ? "/portfolio/resume.pdf" : "/resume.pdf"}
-            target="_blank"
-            className="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-500 transition-colors"
-          >
-            Download PDF
-          </a>
+          <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
+            <a
+              href={process.env.NODE_ENV === 'production' ? "/portfolio/resume.pdf" : "/resume.pdf"}
+              target="_blank"
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-bg-primary bg-[#e8a838] rounded-lg hover:bg-accent-hover transition-colors"
+            >
+              Download PDF
+            </a>
+          </div>
 
-          {/* Mobile Menu Toggle */}
-          <button 
-            className="md:hidden p-2 -mr-2 text-slate-300 hover:text-white transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Menu Toggle & Theme */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button 
+              className="p-2 -mr-2 text-text-secondary hover:text-text-primary transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -94,8 +100,8 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-20 left-0 right-0 z-40 bg-slate-900 border-b border-slate-800 shadow-xl overflow-hidden md:hidden"
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed top-20 left-0 right-0 z-40 bg-bg-card border-b border-border shadow-xl overflow-hidden md:hidden"
           >
             <nav className="flex flex-col p-6 space-y-6">
               {navItems.map((item) => (
@@ -103,7 +109,7 @@ export function Navbar() {
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-lg font-medium text-slate-300 hover:text-white transition-colors"
+                  className="text-lg font-medium text-text-secondary hover:text-text-primary transition-colors"
                 >
                   {item.name}
                 </a>
@@ -112,7 +118,7 @@ export function Navbar() {
                 href={process.env.NODE_ENV === 'production' ? "/portfolio/resume.pdf" : "/resume.pdf"}
                 target="_blank"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="inline-flex w-full items-center justify-center px-4 py-3 text-base font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-colors"
+                className="inline-flex w-full items-center justify-center px-4 py-3 text-base font-medium text-bg-primary bg-[#e8a838] rounded-xl hover:bg-accent-hover transition-colors"
               >
                 Download PDF
               </a>

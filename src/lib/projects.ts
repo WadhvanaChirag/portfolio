@@ -7,12 +7,6 @@ export interface ProjectAssetConfig {
   laptop: string[];
 }
 
-export interface ProjectAssetConfig {
-  mobile: string[];
-  tablet: string[];
-  laptop: string[];
-}
-
 export interface ProjectDetailSection {
   title?: string;
   items: string[];

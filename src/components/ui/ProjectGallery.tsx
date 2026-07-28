@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -36,9 +38,9 @@ function VideoPlayer({ src }: { src: string }) {
         playsInline
         className="w-full h-auto object-cover" 
       />
-      <div className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
-        <button className="w-16 h-16 rounded-full bg-blue-600/90 flex items-center justify-center text-white shadow-xl backdrop-blur-md transform transition-transform group-hover:scale-110">
-          {isPlaying ? <Pause size={28} /> : <Play size={28} className="translate-x-[2px]" />}
+      <div className={`absolute inset-0 flex items-center justify-center bg-black/20 dark:bg-black/40 transition-opacity duration-300 ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+        <button className="w-16 h-16 rounded-full bg-[#e8a838]/90 flex items-center justify-center text-bg-primary shadow-xl backdrop-blur-md transform transition-transform group-hover:scale-110">
+          {isPlaying ? <Pause size={28} /> : <Play size={28} className="translate-x-0.5" />}
         </button>
       </div>
     </div>
@@ -75,12 +77,12 @@ export function ProjectGallery({ project, isOpen, onClose }: { project: Project;
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12">
+      <div className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6 md:p-12">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/20 dark:bg-black/80 backdrop-blur-sm"
           onClick={onClose}
         />
         
@@ -89,23 +91,23 @@ export function ProjectGallery({ project, isOpen, onClose }: { project: Project;
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 30 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-6xl max-h-full bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+          className="relative w-full max-w-6xl max-h-full bg-bg-card border border-border rounded-2xl overflow-hidden shadow-2xl flex flex-col"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-slate-800 shrink-0">
+          <div className="flex items-center justify-between p-6 border-b border-border shrink-0">
             <div className="flex items-center gap-4">
               {project.logoUrl && (
-                <img src={project.logoUrl} alt="Logo" className="w-10 h-10 rounded-xl bg-white/5 p-1 ring-1 ring-white/10 object-contain" />
+                <img src={project.logoUrl} alt="Logo" className="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/5 p-1 ring-1 ring-black/10 dark:ring-white/10 object-contain" />
               )}
               <div>
-                <h3 className="text-xl font-bold text-white">{project.name}</h3>
-                <p className="text-sm text-slate-400">Project Gallery</p>
+                <h3 className="text-xl font-bold text-text-primary">{project.name}</h3>
+                <p className="text-sm text-text-secondary">Project Gallery</p>
               </div>
             </div>
             
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+              className="p-2 rounded-lg hover:bg-border text-text-secondary hover:text-text-primary transition-colors"
             >
               <X size={24} />
             </button>
@@ -115,28 +117,28 @@ export function ProjectGallery({ project, isOpen, onClose }: { project: Project;
           <div className="flex-1 overflow-hidden flex flex-col">
             {/* Tabs */}
             <div className="flex justify-center gap-2 p-4 shrink-0 overflow-x-auto">
-              {tabs.map((tab: any) => (
+              {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
-                  className={`relative flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-colors ${
-                    activeTab === tab.id ? "text-white" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+                  onClick={() => setActiveTab(tab.id as "info" | "mobile" | "tablet" | "laptop")}
+                  className={`relative flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-colors z-0 ${
+                    activeTab === tab.id ? "text-[#0e0e0e]" : "text-text-secondary hover:text-text-primary hover:bg-border"
                   }`}
                 >
-                  <tab.icon size={16} />
-                  {tab.label}
-                  {tab.count !== undefined && (
-                    <span className="ml-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-slate-800 text-[10px]">
-                      {tab.count}
-                    </span>
-                  )}
+                  <span className="relative z-10 flex items-center gap-2">
+                    <tab.icon size={16} />
+                    {tab.label}
+                    {tab.count !== undefined && (
+                      <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${
+                        activeTab === tab.id ? "bg-black/20 text-[#0e0e0e]" : "bg-border text-text-secondary"
+                      }`}>
+                        {tab.count}
+                      </span>
+                    )}
+                  </span>
                   
                   {activeTab === tab.id && (
-                    <motion.div
-                      layoutId="activeTabIndicator"
-                      className="absolute inset-0 bg-blue-600 rounded-full -z-10"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
+                    <div className="absolute inset-0 bg-[#e8a838] rounded-lg z-0" />
                   )}
                 </button>
               ))}
@@ -147,8 +149,8 @@ export function ProjectGallery({ project, isOpen, onClose }: { project: Project;
               <div className="flex-1 overflow-y-auto p-6 sm:p-10 pb-20">
                 <div className="max-w-3xl mx-auto space-y-12">
                   <div className="relative">
-                    <h4 className="text-2xl font-bold text-white mb-4">Project Overview</h4>
-                    <p className="text-lg text-slate-300 leading-relaxed mb-10">{project.desc}</p>
+                    <h4 className="text-2xl font-bold text-text-primary mb-4">Project Overview</h4>
+                    <p className="text-lg text-text-secondary leading-relaxed mb-10">{project.desc}</p>
                     
                     <div className="space-y-10">
                       {project.details?.map((section, idx) => (
@@ -160,12 +162,12 @@ export function ProjectGallery({ project, isOpen, onClose }: { project: Project;
                           className="relative"
                         >
                           {section.title && (
-                            <h5 className="text-[1.05rem] font-semibold text-blue-400 mb-4">{section.title}</h5>
+                            <h5 className="text-[1.05rem] font-semibold text-[#e8a838] mb-4">{section.title}</h5>
                           )}
                           <ul className="space-y-4">
                             {section.items.map((item, itemIdx) => (
-                              <li key={itemIdx} className="flex items-start gap-4 text-slate-300 leading-relaxed group">
-                                <ArrowRight size={18} className="mt-[2px] text-slate-600 group-hover:text-blue-500 transition-colors shrink-0" />
+                              <li key={itemIdx} className="flex items-start gap-4 text-text-secondary leading-relaxed group">
+                                <ArrowRight size={18} className="mt-0.5 text-text-muted group-hover:text-[#e8a838] transition-colors shrink-0" />
                                 <span>{item}</span>
                               </li>
                             ))}
@@ -189,7 +191,7 @@ export function ProjectGallery({ project, isOpen, onClose }: { project: Project;
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative group rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-auto"
+                    className="relative group rounded-xl overflow-hidden border border-border bg-bg-primary aspect-auto"
                   >
                     {isVideo(assetUrl) ? (
                       <VideoPlayer src={assetUrl} />

@@ -1,17 +1,68 @@
 @import "tailwindcss";
-
+@custom-variant dark (&:is(.dark *));
 @theme {
-  --color-brand-blue: #3b82f6;
-  --color-brand-blue-dark: #2563eb;
-  --color-brand-charcoal: #090e17;
-  --color-brand-card: #111827;
-  --color-brand-text: #e2e8f0;
-  --color-brand-text-muted: #94a3b8;
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-border: var(--accent-border);
+  --color-accent-text: var(--accent-text);
+
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-hover: var(--bg-card-hover);
+  --color-border: var(--border-color);
+  --color-border-hover: var(--border-hover);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 :root {
-  --background: var(--color-brand-charcoal);
-  --foreground: var(--color-brand-text);
+  /* Light mode palette */
+  --bg-primary: #fafafa;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f4f4f5;
+  --border-color: #e4e4e7;
+  --border-hover: #d4d4d8;
+  
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+
+  --accent: #e8a838;
+  --accent-hover: #f0b94d;
+  --accent-subtle: rgba(232, 168, 56, 0.1);
+  --accent-border: rgba(232, 168, 56, 0.2);
+  --accent-text: #b47818;
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+}
+
+.dark {
+  /* Dark mode palette (original) */
+  --bg-primary: #0e0e0e;
+  --bg-card: #181818;
+  --bg-card-hover: #1e1e1e;
+  --border-color: #2a2a2a;
+  --border-hover: #3a3a3a;
+  
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+
+  --accent: #e8a838;
+  --accent-hover: #f0b94d;
+  --accent-subtle: rgba(232, 168, 56, 0.1);
+  --accent-border: rgba(232, 168, 56, 0.2);
+  --accent-text: #e8a838;
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
 }
 
 html {
@@ -21,10 +72,36 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
 
+/* Headings use Outfit */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
 .bento-card {
-  @apply bg-[#111827] border border-slate-800 rounded-3xl p-6 md:p-8 transition-transform hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(59,130,246,0.1)];
+  @apply bg-bg-card border border-border rounded-xl p-6 md:p-8 transition-colors duration-200;
+}
+
+.bento-card:hover {
+  border-color: var(--border-hover);
+  background-color: var(--bg-card-hover);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
