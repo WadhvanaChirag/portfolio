@@ -88,7 +88,7 @@ export function PortfolioHome({ projects }: { projects: Project[] }) {
               {/* Profile Image Container */}
               <div className="relative w-48 h-48 lg:w-[260px] lg:h-[260px] rounded-full overflow-hidden border-[4px] border-bg-card shadow-[0_0_40px_rgba(232,168,56,0.15)] bg-bg-card z-10">
                 <img 
-                  src="/profile.png" 
+                  src={process.env.NODE_ENV === "production" ? "/portfolio/profile.png" : "/profile.png"} 
                   alt="Chirag Wadhvana" 
                   className="w-full h-full object-cover"
                 />
