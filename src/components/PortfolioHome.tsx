@@ -2,35 +2,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Download, Smartphone, Server, Wrench, Code2, Linkedin, Layers, Check } from "lucide-react";
+import { Mail, Download, Smartphone, Server, Wrench, Linkedin, Layers } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Section } from "@/components/ui/Section";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import type { Project } from "@/lib/projects";
 
-const skills = [
-  {
-    category: "Mobile Development",
-    items: "Flutter, Dart, Android (Java/Kotlin), iOS, Cross-platform apps for Android, iOS & Web",
-    icon: Smartphone,
-  },
-  {
-    category: "State Management & Architecture",
-    items: "Provider, GetX, Clean Architecture, MVVM, Responsive & Adaptive UI",
-    icon: Code2,
-  },
-  {
-    category: "Backend & Cloud",
-    items: "REST APIs, Firebase Auth, Firestore, FCM Push Notifications, Cloud Functions, Local Databases (Hive, SQLite)",
-    icon: Server,
-  },
-  {
-    category: "Tools & Integrations",
-    items: "Git, Xcode, In-App Purchases, Google AdMob, QR/Barcode Scanning, Google Maps, App Store & Play Store Publishing",
-    icon: Wrench,
-  },
-];
 
 const experience = [
   {
